@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristos Coffee: An Interactive Acquisition Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chosen Palette: Morning Brew -->
+    <!-- Application Structure Plan: The SPA is structured as a narrative scroll, starting with high-level KPIs to grab attention. It then drills down into the Financial Details with interactive charts, outlines the qualitative Growth Strategy using visual cards, and concludes with a clear, actionable Path to Ownership. This structure was chosen to guide a potential investor from the "what" (the opportunity) to the "why" (the financials) and the "how" (the strategy and next steps), making a complex business plan easily digestible and persuasive. -->
+    <!-- Visualization & Content Choices: 
+        - Acquisition Costs: Goal: Compare -> Viz: Doughnut Chart -> Justification: Clearly shows the composition of the total initial investment. (Chart.js, NO SVG).
+        - Profitability Path: Goal: Inform -> Viz: HTML/CSS Flow -> Justification: A simple visual formula is more direct for showing a calculation than a chart. (HTML/CSS, NO SVG).
+        - ROI: Goal: Inform -> Viz: Gauge-style Doughnut Chart -> Justification: Provides an immediate, impactful visual of the high return percentage. (Chart.js, NO SVG).
+        - Profit Distribution: Goal: Compare -> Viz: Pie Chart -> Justification: Perfect for illustrating the equal 3-way split of profits among partners. (Chart.js, NO SVG).
+        - Growth Strategy: Goal: Organize -> Viz: HTML/CSS Icon Cards -> Justification: Breaks down qualitative strategies into scannable, visually distinct sections. (HTML/CSS, NO SVG).
+        - Path to Ownership: Goal: Organize -> Viz: HTML/CSS Flowchart -> Justification: Translates a checklist into a clear, time-based process. (HTML/CSS, NO SVG).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="text-center p-8 shadow-md" style="background-color: #3d2c25; color: white;">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Cristos Coffee</h1>
+        <p class="mt-2 text-xl font-light">An Interactive Acquisition & Growth Plan</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="opportunity" class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4" style="color: #3d2c25;">The Opportunity at a Glance</h2>
+            <p class="max-w-3xl mx-auto text-gray-600 mb-8">
+                This plan outlines the acquisition of Cristos Coffee, a proven and profitable business. Analysis of financial data reveals a low-risk, high-return investment opportunity with a clear path to continued success.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="kpi-card">
+                    <span class="text-lg font-semibold text-gray-500">Acquisition Price</span>
+                    <span class="text-5xl font-extrabold" style="color: #a0522d;">$100,000</span>
+                    <span class="text-sm text-gray-400 mt-2">Includes all assets, no debt.</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="text-lg font-semibold text-gray-500">Projected Annual Net Income</span>
+                    <span class="text-5xl font-extrabold" style="color: #cd853f;">$93,420</span>
+                     <span class="text-sm text-gray-400 mt-2">After eliminating previous owner's debt.</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="text-lg font-semibold text-gray-500">Payback Period</span>
+                    <span class="text-5xl font-extrabold" style="color: #e8a346;">~1.07</span>
+                    <span class="text-lg font-bold" style="color: #e8a346;">Years</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="financials" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-4" style="color: #3d2c25;">Financial Deep Dive</h2>
+            <p class="max-w-3xl mx-auto text-gray-600 mb-8 text-center">
+                The financial strength of this acquisition lies in its strong existing profitability, which is significantly enhanced by favorable sale terms that eliminate previous debt obligations.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-2 text-center" style="color: #6b4c3f;">Total Initial Investment</h3>
+                    <p class="text-sm text-center text-gray-600 mb-4">The total upfront capital required includes the purchase price, funds to cover initial operating liabilities (working capital), and estimated legal fees.</p>
+                    <div class="chart-container">
+                        <canvas id="acquisitionCostChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-2 text-center" style="color: #6b4c3f;">Path to Enhanced Profitability</h3>
+                    <p class="text-sm text-center text-gray-600 mb-4">By removing the previous owner's debt payments, the cafe's net income available to the new partners increases by over $22,000 annually.</p>
+                    <div class="flex flex-col items-center justify-center h-full space-y-4 pt-4">
+                        <div class="text-center bg-gray-100 p-4 rounded-lg w-full max-w-sm">
+                            <p class="text-sm font-semibold text-gray-500">2024 Net Income</p>
+                            <p class="text-2xl font-bold" style="color: #a0522d;">$71,388</p>
+                        </div>
+                        <div class="text-4xl font-bold" style="color: #cd853f;">+</div>
+                        <div class="text-center bg-gray-100 p-4 rounded-lg w-full max-w-sm">
+                            <p class="text-sm font-semibold text-gray-500">Eliminated Interest Expense</p>
+                            <p class="text-2xl font-bold" style="color: #cd853f;">$22,032</p>
+                        </div>
+                         <div class="text-4xl font-bold" style="color: #e8a346;">=</div>
+                        <div class="text-center bg-green-100 p-4 rounded-lg w-full max-w-sm border-2 border-green-500">
+                            <p class="text-sm font-semibold text-green-700">New Projected Net Income</p>
+                            <p class="text-2xl font-bold text-green-600">$93,420</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-2 text-center" style="color: #6b4c3f;">Return on Investment (ROI)</h3>
+                     <p class="text-sm text-center text-gray-600 mb-4">The projected annual net income represents a powerful 93.42% return on the initial $100,000 purchase price, highlighting the investment's strength.</p>
+                    <div class="chart-container">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-2 text-center" style="color: #6b4c3f;">Annual Profit Distribution</h3>
+                    <p class="text-sm text-center text-gray-600 mb-4">With a three-partner structure and an equal profit split, each partner can expect a solid annual return from the business's net income.</p>
+                    <div class="chart-container">
+                        <canvas id="profitDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="mb-16">
+             <h2 class="text-3xl font-bold text-center mb-4" style="color: #3d2c25;">Mission-Driven Growth Strategy</h2>
+             <p class="max-w-3xl mx-auto text-gray-600 mb-8 text-center">
+                Our mission is "To consistently craft exceptional coffee and provide a welcoming experience that elevates the day of every person we serve." This will be achieved through four key pillars, building upon the cafe's existing strong organic demand.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-5xl mb-4">🏆</div>
+                    <h3 class="text-lg font-bold mb-2" style="color: #a0522d;">Customer Loyalty</h3>
+                    <p class="text-sm text-gray-600">Focus on maintaining consistent, high-quality service and products to retain the existing customer base.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <div class="text-5xl mb-4">📱</div>
+                    <h3 class="text-lg font-bold mb-2" style="color: #cd853f;">Social Media</h3>
+                    <p class="text-sm text-gray-600">Develop a strong social media presence to engage with the local community and showcase our unique atmosphere.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                     <div class="text-5xl mb-4">🎟️</div>
+                    <h3 class="text-lg font-bold mb-2" style="color: #e8a346;">Loyalty Program</h3>
+                    <p class="text-sm text-gray-600">Implement a program to reward frequent customers and provide an incentive for repeat business.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                     <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-lg font-bold mb-2" style="color: #6b4c3f;">Local Partnerships</h3>
+                    <p class="text-sm text-gray-600">Partner with other local businesses to cross-promote services and strengthen our community ties.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="path-forward" class="text-center">
+             <h2 class="text-3xl font-bold mb-4" style="color: #3d2c25;">The Path to Ownership</h2>
+             <p class="max-w-3xl mx-auto text-gray-600 mb-8">
+                A structured, three-phase approach will ensure a smooth and successful transition from acquisition to operation.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-4">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/3 flex flex-col">
+                    <p class="font-bold text-lg mb-2" style="color: #a0522d;">Phase 1: Due Diligence</p>
+                    <ul class="text-sm text-gray-600 text-left list-disc list-inside space-y-1">
+                        <li>Finalize legal partnership</li>
+                        <li>Conduct financial review</li>
+                        <li>Complete asset inspection</li>
+                    </ul>
+                </div>
+                <div class="self-center text-4xl font-light mx-4 hidden md:block" style="color: #e8a346;">→</div>
+                <div class="self-center text-4xl font-light my-2 md:hidden" style="color: #e8a346;">↓</div>
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/3 flex flex-col">
+                    <p class="font-bold text-lg mb-2" style="color: #cd853f;">Phase 2: Transaction</p>
+                    <ul class="text-sm text-gray-600 text-left list-disc list-inside space-y-1">
+                        <li>Secure all funding</li>
+                        <li>Sign purchase agreements</li>
+                        <li>Transfer ownership</li>
+                    </ul>
+                </div>
+                 <div class="self-center text-4xl font-light mx-4 hidden md:block" style="color: #e8a346;">→</div>
+                 <div class="self-center text-4xl font-light my-2 md:hidden" style="color: #e8a346;">↓</div>
+                <div class="bg-white rounded-lg shadow-lg p-6 w-full md:w-1/3 flex flex-col">
+                    <p class="font-bold text-lg mb-2" style="color: #6b4c3f;">Phase 3: Operation</p>
+                    <ul class="text-sm text-gray-600 text-left list-disc list-inside space-y-1">
+                        <li>Take over daily operations</li>
+                        <li>Manage staff transition</li>
+                        <li>Implement growth plan</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-4 mt-8 bg-gray-200 text-gray-600 text-xs">
+        <p>This interactive application is a visual representation of the Cristos Coffee Business Plan.</p>
+        <p>Data is derived from financial statements provided for the years 2022-2024.</p>
+    </footer>
+
+    <script>
+        const morningBrewPalette = ['#a0522d', '#cd853f', '#e8a346', '#6b4c3f', '#3d2c25', '#f0f2f5'];
+
+        function wrapLabel(label, maxWidth = 16) {
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        function createAcquisitionCostChart() {
+            const ctx = document.getElementById('acquisitionCostChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [wrapLabel('Purchase Price'), wrapLabel('Working Capital Needed'), wrapLabel('Estimated Legal Fees')],
+                    datasets: [{
+                        label: 'Cost Breakdown',
+                        data: [100000, 41581.96, 7500],
+                        backgroundColor: [morningBrewPalette[0], morningBrewPalette[1], morningBrewPalette[2]],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    let value = context.parsed;
+                                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createRoiChart() {
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Annual Return', 'Remaining'],
+                    datasets: [{
+                        label: 'Return on Investment',
+                        data: [93.42, 6.58],
+                        backgroundColor: [morningBrewPalette[1], '#e0e0e0'],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        circumference: 180,
+                        rotation: 270,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: (context) => `${context.parsed.toFixed(2)}%`
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                },
+                 plugins: [{
+                    id: 'centerText',
+                    afterDraw: function(chart) {
+                        const { width, height, ctx } = chart;
+                        ctx.restore();
+                        const fontSize = (height / 114).toFixed(2);
+                        ctx.font = `bold ${fontSize}em sans-serif`;
+                        ctx.textBaseline = "middle";
+                        ctx.fillStyle = morningBrewPalette[1];
+                        const text = "93.42% ROI";
+                        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+                        const textY = height / 1.5;
+                        ctx.fillText(text, textX, textY);
+                        ctx.save();
+                    }
+                }]
+            });
+        }
+        
+        function createProfitDistributionChart() {
+            const ctx = document.getElementById('profitDistributionChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Partner 1', 'Partner 2', 'Partner 3'],
+                    datasets: [{
+                        label: 'Profit per Partner',
+                        data: [31139.89, 31139.89, 31139.89],
+                        backgroundColor: [morningBrewPalette[0], morningBrewPalette[3], morningBrewPalette[2]],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                 label: function(context) {
+                                    let value = context.parsed;
+                                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createAcquisitionCostChart();
+            createRoiChart();
+            createProfitDistributionChart();
+        });
+    </script>
+</body>
+</html>
